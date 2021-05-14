@@ -35,7 +35,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="jP3-Pc-2Wb">
-                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="ZGJ-DR-ERA"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="ZGJ-DR-ERA">
+                            <connections>
+                                <action selector="addButtonPresse:" destination="DWE-4l-lwQ" id="JYE-TP-6dg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UN3-QY-2U2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

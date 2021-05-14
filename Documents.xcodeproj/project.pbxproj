@@ -13,6 +13,7 @@
 		874A2453264EBF1200A3A0B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 874A2451264EBF1200A3A0B7 /* Main.storyboard */; };
 		874A2455264EBF1300A3A0B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 874A2454264EBF1300A3A0B7 /* Assets.xcassets */; };
 		874A2458264EBF1300A3A0B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 874A2456264EBF1300A3A0B7 /* LaunchScreen.storyboard */; };
+		874A2461264EC1DC00A3A0B7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874A2460264EC1DC00A3A0B7 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		874A2454264EBF1300A3A0B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		874A2457264EBF1300A3A0B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		874A2459264EBF1300A3A0B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		874A2460264EC1DC00A3A0B7 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				874A2454264EBF1300A3A0B7 /* Assets.xcassets */,
 				874A2456264EBF1300A3A0B7 /* LaunchScreen.storyboard */,
 				874A2459264EBF1300A3A0B7 /* Info.plist */,
+				874A2460264EC1DC00A3A0B7 /* TableViewCell.swift */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				874A2450264EBF1200A3A0B7 /* ViewController.swift in Sources */,
+				874A2461264EC1DC00A3A0B7 /* TableViewCell.swift in Sources */,
 				874A244C264EBF1200A3A0B7 /* AppDelegate.swift in Sources */,
 				874A244E264EBF1200A3A0B7 /* SceneDelegate.swift in Sources */,
 			);
