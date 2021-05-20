@@ -10,15 +10,20 @@ import Photos
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    private let userDefaults = UserDefaults.standard
     private let tableView = UITableView(frame: .zero, style: .plain)
-    private var images = [URL]()
     private let imagePicker = UIImagePickerController()
+    private var images = [URL]()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getFiles()
+        tableView.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imagePicker.delegate = self
-        getFiles()
         setupViews()
         setupTableView()
     }
@@ -82,6 +87,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         for file in contents {
             images.append(file)
+        }
+        
+        if userDefaults.bool(forKey: "abc") {
+            images.sort {
+                $0.lastPathComponent > $1.lastPathComponent
+            }
+        } else {
+            images.sort {
+                $0.lastPathComponent < $1.lastPathComponent
+            }
         }
     }
 }
