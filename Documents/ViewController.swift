@@ -24,14 +24,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func addButtonPresse(_ sender: Any) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-                
         present(imagePicker, animated: true, completion: nil)
     }
     
-    
     private func setupViews() {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
         view.addSubview(tableView)
         
         let constraints = [
@@ -54,8 +53,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         )
     }
     
-// MARK: - UIImagePickerControllerDelegate Methods
-        
+// MARK: - UIImagePickerControllerDelegate Method
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let imageURL = info[.imageURL] as! URL
         print(imageURL)
@@ -74,6 +72,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
     }
     
+// MARK: - Working with files Method
     func getFiles() {
         images.removeAll()
         let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask,   appropriateFor: nil, create: false)
