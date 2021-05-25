@@ -42,57 +42,6 @@ class LoginViewController: UIViewController {
         setupViews()
     }
     
-
-    private func isPassExists() -> Bool {
-        let pass = keychain["password"]
-        return pass != nil
-    }
-    
-    private func savePass(pass: String) {
-        if pass.count >= 4 {
-            keychain["password"] = pass
-        } else {
-            showAlert(error: "Пароль должен содержать минимум 4 символа")
-        }
-    }
-    
-    private func getPass() -> String {
-        return keychain["password"]!
-    }
-    
-    func showAlert(error: String) {
-        let alertController = UIAlertController(title: "Ошибка!", message: error, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            print("OK")
-        }
-        alertController.addAction(okAction)
-        navigationController?.present(alertController, animated: true, completion: nil)
-    }
-    
-    @objc private func loginButtonPressed() {
-        if emailTextField.text != nil && emailTextField.text != "" {
-            if !isPassExists() && firstPass == "" {
-                firstPass = emailTextField.text!
-                emailTextField.text = ""
-                loginButton.setTitle("Повторите пароль", for: .normal)
-            } else if !isPassExists() && firstPass != "" {
-                if emailTextField.text! == firstPass {
-                    savePass(pass: emailTextField.text!)
-                    let vc = ViewController()
-                    navigationController?.pushViewController(vc, animated: true)
-                } else {
-                    showAlert(error: "Пароли не совпадают")
-                }
-            } else if isPassExists() && emailTextField.text! == getPass() {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-            }
-        } else {
-            showAlert(error: "Введите пароль!")
-        }
-    }
-    
     private func setupViews() {
         if isPassExists() {
             loginButton.setTitle("Введите пароль", for: .normal)
@@ -102,6 +51,7 @@ class LoginViewController: UIViewController {
         
         view.addSubview(emailTextField)
         view.addSubview(loginButton)
+        view.backgroundColor = .white
         
         let constraints = [
             emailTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 55),
@@ -117,4 +67,78 @@ class LoginViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     
+    @objc private func loginButtonPressed() {
+        if emailTextField.text != nil && emailTextField.text != "" {
+            if isModal {
+                checkFirstPass()
+            } else {
+                if isPassExists() {
+                    checkpass()
+                } else {
+                    checkFirstPass()
+                }
+            }
+        } else {
+            showAlert(error: "Введите пароль!")
+        }
+    }
+    
+    private func isPassExists() -> Bool {
+        let pass = keychain["password"]
+        return pass != nil
+    }
+    
+    private func checkFirstPass() {
+        if firstPass == "" {
+            firstPass = emailTextField.text!
+            emailTextField.text = ""
+            loginButton.setTitle("Повторите пароль", for: .normal)
+        } else {
+            if emailTextField.text! == firstPass {
+                savePass(pass: emailTextField.text!)
+                closeVC()
+            } else {
+                showAlert(error: "Пароли не совпадают")
+            }
+        }
+    }
+    
+    private func savePass(pass: String) {
+        if pass.count >= 4 {
+            keychain["password"] = pass
+        } else {
+            showAlert(error: "Пароль должен содержать минимум 4 символа")
+        }
+    }
+    
+    func closeVC() {
+        if isModal {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+        }
+    }
+    
+    private func checkpass() {
+        if emailTextField.text! == getPass() {
+            closeVC()
+        } else {
+           showAlert(error: "Введён неверный пароль")
+        }
+    }
+    
+    private func getPass() -> String {
+        return keychain["password"]!
+    }
+    
+    func showAlert(error: String) {
+        let alertController = UIAlertController(title: "Ошибка!", message: error, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            print("OK")
+        }
+        alertController.addAction(okAction)
+        navigationController?.present(alertController, animated: true, completion: nil)
+    }
 }

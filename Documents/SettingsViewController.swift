@@ -72,7 +72,7 @@ class SettingsViewController: UIViewController {
     
 
     @objc private func changePassButtonPressed() {
-        let vc = NewPassViewController()
+        let vc = LoginViewController()
         navigationController?.present(vc, animated: true, completion: nil)
     }
     
